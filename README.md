@@ -1,13 +1,18 @@
 Forked from [cX12/dashboard](http://github.com/cX12/dashboard)
 
-To Do:
+#### Git Clone
 
-Every tab except General
-Move Network to a new page and add AJAX
+If you have Git installed you can clone the repo
 
-Plans:
+      git clone https://github.com/lightluke/dashboard.git
 
-Add flotr for fancy charts
-Wake-On-Lan functionality
-Notifications
-Links to other running webservices
+#### To Do:
+
+- Every tab except General
+- Move Network to a new page and add AJAX
+
+#### Plans:
+
+- Add charts
+- Wake-On-Lan functionality
+- Installed Software List
