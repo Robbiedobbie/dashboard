@@ -10,7 +10,7 @@ echo "
             <span class='icon-bar'></span>
             <span class='icon-bar'></span>
           </button>
-          <a class='brand' href='index.php'>Dashboard</a>
+          <a class='brand' href='index.php'>".$device_name."</a>
           <div class='nav-collapse collapse pull-right'>
             <ul class='nav'>
               <li><a href='index.php'>General</a></li>
