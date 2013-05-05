@@ -1,0 +1,1 @@
+<tr><td>{{@TrafficInterfaceDate}}</td><td>{{@TrafficRX}}</td><td>{{@TrafficTX}}</td><td>{{@TrafficTotal}}</td><td>{{@TrafficEstimated}}</td></tr>

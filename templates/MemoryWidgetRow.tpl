@@ -1,0 +1,1 @@
+<tr><td>{{@MemoryRowName}}</td><td>{{@MemoryRowTotal}}</td><td>{{@MemoryRowUsed}}</td><td>{{@MemoryRowFree}}</td></tr>

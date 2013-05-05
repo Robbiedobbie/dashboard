@@ -1,122 +1,32 @@
-<?php include('internals/layout/meta.php'); ?>
-    <!-- AJAX Content Refresh -->
-    <!-- Uptime -->
-    <script type="text/javascript">
-      <?php include('config/intervals.php'); ?>
-      function updateKernel(){
-	$('#dashboard-kernel').html('<?php echo exec('uname -r'); ?>');
-      }
-      function updateUptime(){
-        $('#dashboard-uptime').load('internals/functions/uptime.php');
-      }
-      function updateLoad() {
-        $('#dashboard-load').load('internals/functions/load.php');
-      }
-      function updateMemory(){
-        $('#dashboard-memory').load('internals/functions/memory.php');
-      }
-      function updateStorage(){
-        $('#dashboard-storage').load('internals/functions/storage.php');
-      }
-      function updateNetwork(){
-	$('#dashboard-network').load('internals/functions/network.php');
-      }
-      function updateTraffic(){
-        $('#dashboard-traffic').load('internals/functions/traffic.php');
-      }
-    </script>
+<?php
+error_reporting(E_ALL);
 
-  </head>
+function exception_error_handler($errno, $errstr, $errfile, $errline ) {
+    throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+}
+set_error_handler("exception_error_handler");
 
-  <body>
+require_once('ClassLoader.php');
+//Imports given classes (All if no argument is supplied)import();
+import();
 
-    <?php include('internals/layout/navbar.php'); ?>
-
-    <div class="container">
-
-      <div class="row">
-        <span class="span6">
-	  <h2>System Information</h2>
-	  <table class="table">
-	    <thead>
-	      <th><span class="color">Property</span></th>
-	      <th><span class="color">Value</span></th>
-	    </thead>
-	    <tr>
-	      <td>Kernel version:</td>
-	      <td id="dashboard-kernel"><?php echo exec('uname -r'); ?></td>
-	    </tr>
-	    <tr>
-	      <td>Uptime:</td>
-	      <td id="dashboard-uptime"><?php include('internals/functions/uptime.php'); ?></td>
-	    </tr>
-	    <tr>
-	      <td>Hostname:</td>
-	      <td><?php echo exec('uname -n'); ?></td>
-	    </tr>
-	    <tr>
-	      <td>Hardware name:</td>
-	      <td><?php echo exec('uname -m'); ?></td>
-	    </tr>
-	    <tr>
-	      <td>Operating system:</td>
-	      <td><?php echo exec('uname -o'); ?></td>
-	    </tr>
-	    <tr>
-	      <td>System load:</td>
-	      <td id="dashboard-load"><?php include('internals/functions/load.php'); ?></td>
-	    </tr>
-	    <tr>
-              <td>System temperature:</td>
-              <td><?php echo exec('cat /sys/class/thermal/thermal_zone0/temp') / 1000; ?> &deg;C</td>
-            </tr>
-	  </table>
-	</span>
-        <span class="span6" id="dashboard-memory">
-	      <?php include('internals/functions/memory.php'); ?>
-	</span>
-      </div>
-
-      <div class="row">	
-        <span class="span12" id="dashboard-storage">
-	      <?php include('internals/functions/storage.php'); ?>
-	</span>
-      </div>
-
-      <div class="row">
-        <span class="span12" id="dashboard-traffic">
-          <?php include('internals/functions/traffic.php'); ?>
-        </span>
-      </div>
-
-      <div class="row">
-        <span class="span12" id="dashboard-network">
-          <?php include('internals/functions/network.php'); ?>
-        </span>
-      </div>
-
-
-      </div>
-
-    </div> <!-- /container -->
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap/js/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap-transition.js"></script>
-    <script src="bootstrap/js/bootstrap-alert.js"></script>
-    <script src="bootstrap/js/bootstrap-modal.js"></script>
-    <script src="bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="bootstrap/js/bootstrap-tab.js"></script>
-    <script src="bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="bootstrap/js/bootstrap-popover.js"></script>
-    <script src="bootstrap/js/bootstrap-button.js"></script>
-    <script src="bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="bootstrap/js/bootstrap-typeahead.js"></script>
-
-  </body>
-</html>
-
+class DashBoard {
+    private $pageTemplate;
+    
+    public function __construct() {
+        $this->pageTemplate = new Template("MainLayout.tpl");
+    }
+    
+    public function displayPage() {
+        include("config/details.php");
+        $this->pageTemplate->setValue("DeviceName", $device_name);
+        $this->pageTemplate->setValue("SystemInfoWidget", new SystemInfoWidget());
+        $this->pageTemplate->setValue("MemoryWidget", new MemoryWidget());
+        $this->pageTemplate->setValue("StorageWidget", new StorageWidget());
+        $this->pageTemplate->setValue("NetworkTrafficWidget", new NetworkTrafficWidget());
+        echo $this->pageTemplate->getOutput();
+    }
+} 
+$board = new DashBoard();
+$board->displayPage();
+?>
