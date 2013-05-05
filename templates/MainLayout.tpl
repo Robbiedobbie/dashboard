@@ -83,7 +83,7 @@
 
       <div class="row">
         <span class="span12" id="dashboard-network">
-          <?php include('internals/functions/network.php'); ?>
+          {{@NetworkConnectionsWidget}}
         </span>
       </div>
 

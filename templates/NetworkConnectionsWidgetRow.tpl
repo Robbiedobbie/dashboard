@@ -1,0 +1,1 @@
+<tr><td>{{@ConnectionsProtocol}}</td><td>{{@ConnectionsRQueue}}</td><td>{{@ConnectionsSQueue}}</td><td>{{@ConnectionsLocalAddress}}</td><td>{{@ConnectionsForeignAddress}}</td><td>{{@ConnectionsState}}</td></tr>

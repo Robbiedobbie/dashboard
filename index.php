@@ -24,6 +24,7 @@ class DashBoard {
         $this->pageTemplate->setValue("MemoryWidget", new MemoryWidget());
         $this->pageTemplate->setValue("StorageWidget", new StorageWidget());
         $this->pageTemplate->setValue("NetworkTrafficWidget", new NetworkTrafficWidget());
+        $this->pageTemplate->setValue("NetworkConnectionsWidget", new NetworkConnectionWidget());
         echo $this->pageTemplate->getOutput();
     }
 } 
