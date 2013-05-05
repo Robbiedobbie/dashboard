@@ -66,6 +66,10 @@
 	      <td>System load:</td>
 	      <td id="dashboard-load"><?php include('internals/functions/load.php'); ?></td>
 	    </tr>
+	    <tr>
+              <td>System temperature:</td>
+              <td><?php echo exec('cat /sys/class/thermal/thermal_zone0/temp') / 1000; ?> &deg;C</td>
+            </tr>
 	  </table>
 	</span>
         <span class="span6" id="dashboard-memory">
