@@ -19,12 +19,27 @@ class DashBoard {
     
     public function displayPage() {
         include("config/details.php");
+        $ajaxFactory = new AjaxFactory();
+        
+        $systemInfoWidget = new SystemInfoWidget();
+        $memoryWidget = new MemoryWidget();
+        $storageWidget = new StorageWidget();
+        $networkTrafficWidget = new NetworkTrafficWidget();
+        $networkConnectionsWidget = new NetworkConnectionsWidget();
+        
+        $ajaxFactory->registerWidget($systemInfoWidget);
+        $ajaxFactory->registerWidget($memoryWidget);
+        $ajaxFactory->registerWidget($storageWidget);
+        $ajaxFactory->registerWidget($networkTrafficWidget);
+        $ajaxFactory->registerWidget($networkConnectionsWidget);
+        
         $this->pageTemplate->setValue("DeviceName", $device_name);
-        $this->pageTemplate->setValue("SystemInfoWidget", new SystemInfoWidget());
-        $this->pageTemplate->setValue("MemoryWidget", new MemoryWidget());
-        $this->pageTemplate->setValue("StorageWidget", new StorageWidget());
-        $this->pageTemplate->setValue("NetworkTrafficWidget", new NetworkTrafficWidget());
-        $this->pageTemplate->setValue("NetworkConnectionsWidget", new NetworkConnectionWidget());
+        $this->pageTemplate->setValue("SystemInfoWidget", $systemInfoWidget);
+        $this->pageTemplate->setValue("MemoryWidget", $memoryWidget);
+        $this->pageTemplate->setValue("StorageWidget", $storageWidget);
+        $this->pageTemplate->setValue("NetworkTrafficWidget", $networkTrafficWidget);
+        $this->pageTemplate->setValue("NetworkConnectionsWidget", $networkConnectionsWidget);
+        $this->pageTemplate->setValue("AjaxScripts", $ajaxFactory);
         echo $this->pageTemplate->getOutput();
     }
 } 
