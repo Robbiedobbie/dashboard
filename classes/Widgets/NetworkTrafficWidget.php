@@ -35,6 +35,8 @@ class NetworkTrafficWidget {
                 
                 if(count($parts) >= 4) {
                     $output[] = array("TrafficInterfaceDate" => trim($firstpiece), "TrafficRX" => $parts[0], "TrafficTX" => $parts[1], "TrafficTotal" => $parts[2], "TrafficEstimated" => $parts[3]);
+                } else if(count($parts) == 3) {
+                    $output[] = array("TrafficInterfaceDate" => trim($firstpiece), "TrafficRX" => $parts[0], "TrafficTX" => $parts[1], "TrafficTotal" => $parts[2], "TrafficEstimated" => "");
                 } else {
                     $output[] = array("TrafficInterfaceDate" => trim($firstpiece), "TrafficRX" => "", "TrafficTX" => "", "TrafficTotal" => "", "TrafficEstimated" => "");
                 }
