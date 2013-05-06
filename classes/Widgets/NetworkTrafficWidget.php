@@ -6,7 +6,7 @@
  *
  * @author Rob Bogie
  */
-class NetworkTrafficWidget {
+class NetworkTrafficWidget implements AjaxWidget {
     private $networkTrafficTemplate;
     private $tableRowTemplate;
     public function __construct() {
@@ -47,6 +47,18 @@ class NetworkTrafficWidget {
             $output[] = array("TrafficInterfaceDate" => "No data available!", "TrafficRX" => "", "TrafficTX" => "", "TrafficTotal" => "", "TrafficEstimated" => "");
         }
         return $output;
+    }
+    
+    public function getAjaxInterval() {
+        return 30000;
+    }
+
+    public function getAjaxScript() {
+        return "function NetworkTrafficWidget() { $('#dashboard-traffic').load('Ajax.php?widget=NetworkTrafficWidget');}";
+    }
+
+    public function processAction($action) {
+        echo $this;
     }
 }
 

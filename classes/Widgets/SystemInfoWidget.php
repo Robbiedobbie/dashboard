@@ -1,12 +1,14 @@
 <?php
 
+require_once 'classes/Widgets/AjaxWidget.php';
+
 /**
  * This is a dashboard which provides all kinds of information about the system
  * on which it is running.
  *
  * @author Rob Bogie
  */
-class SystemInfoWidget {
+class SystemInfoWidget implements AjaxWidget{
     private $systemInfoTemplate;
     
     public function __construct() {
@@ -65,6 +67,28 @@ class SystemInfoWidget {
     
     public static function getTemperature() {
         return (exec('cat /sys/class/thermal/thermal_zone0/temp') / 1000)." &deg;C";
+    }
+
+    public function getAjaxInterval() {
+        return 10000;
+    }
+
+    public function getAjaxScript() {
+        return "function SystemInfoWidget() { $('#dashboard-load').load('Ajax.php?widget=SystemInfoWidget&action=updateLoad'); $('#dashboard-temperature').load('Ajax.php?widget=SystemInfoWidget&action=updateTemp');}";
+    }
+
+    public function processAction($action) {
+        switch($action) {
+            case "updateLoad":
+                echo SystemInfoWidget::getLoad();
+                break;
+            case "updateTemp":
+                echo SystemInfoWidget::getTemperature();
+                break;
+            default:
+                echo "No data available!";
+                break;
+        }
     }
 }
 

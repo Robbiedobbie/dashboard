@@ -26,7 +26,7 @@
 
     <!-- Uptime -->
     <script type="text/javascript">
-      {{@InformationUpdateScript}}
+      {{@AjaxScripts}}
     </script>
 
   </head>

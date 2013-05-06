@@ -6,14 +6,14 @@
  *
  * @author Rob Bogie
  */
-class NetworkConnectionWidget {
+class NetworkConnectionsWidget implements AjaxWidget {
     private $networkConnectionsTemplate;
     private $tableRowTemplate;
     public function __construct() {
         $this->networkConnectionsTemplate = new Template("NetworkConnectionsWidget.tpl");
         $this->tableRowTemplate = new Template("NetworkConnectionsWidgetRow.tpl");
         $this->networkConnectionsTemplate->setValue("NetworkConnectionsTableRows", $this->tableRowTemplate);
-        $this->tableRowTemplate->setValues(NetworkConnectionWidget::getNetworkConnectionsInfo());
+        $this->tableRowTemplate->setValues(NetworkConnectionsWidget::getNetworkConnectionsInfo());
     }
     
     public function __toString() {
@@ -37,6 +37,18 @@ class NetworkConnectionWidget {
             $lineCounter++;
         }
         return $output;
+    }
+    
+    public function getAjaxInterval() {
+        return 30000;
+    }
+
+    public function getAjaxScript() {
+        return "function NetworkConnectionsWidget() { $('#dashboard-network').load('Ajax.php?widget=NetworkConnectionsWidget');}";
+    }
+
+    public function processAction($action) {
+        echo $this;
     }
 }
 

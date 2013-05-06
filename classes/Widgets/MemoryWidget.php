@@ -6,7 +6,7 @@
  *
  * @author Rob Bogie
  */
-class MemoryWidget {
+class MemoryWidget implements AjaxWidget {
     private $memoryTemplate;
     private $tableRowTemplate;
     public function __construct() {
@@ -38,6 +38,19 @@ class MemoryWidget {
         }
         return $output;
     }
+    
+    public function getAjaxInterval() {
+        return 30000;
+    }
+
+    public function getAjaxScript() {
+        return "function MemoryWidget() { $('#dashboard-memory').load('Ajax.php?widget=MemoryWidget');}";
+    }
+
+    public function processAction($action) {
+        echo $this;
+    }
+    
 }
 
 ?>

@@ -30,6 +30,6 @@
 	    </tr>
 	    <tr>
               <td>System temperature:</td>
-              <td>{{@SystemTemperature}}</td>
+              <td id="dashboard-temperature">{{@SystemTemperature}}</td>
             </tr>
 	  </table>

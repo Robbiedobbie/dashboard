@@ -6,7 +6,7 @@
  *
  * @author Rob Bogie
  */
-class StorageWidget {
+class StorageWidget implements AjaxWidget{
     private $storageTemplate;
     private $tableRowTemplate;
     public function __construct() {
@@ -38,6 +38,18 @@ class StorageWidget {
             }
         }
         return $output;
+    }
+    
+    public function getAjaxInterval() {
+        return 30000;
+    }
+
+    public function getAjaxScript() {
+        return "function StorageWidget() { $('#dashboard-storage').load('Ajax.php?widget=StorageWidget');}";
+    }
+
+    public function processAction($action) {
+        echo $this;
     }
 }
 
