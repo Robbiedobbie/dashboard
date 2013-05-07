@@ -14,7 +14,7 @@ class SystemInfoWidget implements AjaxWidget{
     public function __construct() {
         $this->systemInfoTemplate = new Template("SystemInfoWidget.tpl");
         $this->systemInfoTemplate->setValue("SystemKernel", SystemInfoWidget::getKernelVersion());
-        $this->systemInfoTemplate->setValue("SystemUptime", SystemInfoWidget::getUptime());
+        $this->systemInfoTemplate->setValue("SystemUptime", SystemInfoWidget::getUptimeString());
         $this->systemInfoTemplate->setValue("SystemHostname", SystemInfoWidget::getHostname());
         $this->systemInfoTemplate->setValue("SystemArchitecture", SystemInfoWidget::getArchitecture());
         $this->systemInfoTemplate->setValue("SystemOS", SystemInfoWidget::getOS());
@@ -30,8 +30,8 @@ class SystemInfoWidget implements AjaxWidget{
         return exec('uname -r');
     }
     
-    public static function getUptime() {
-        $ss = exec('cat /proc/uptime'); // get uptime
+    public static function getUptimeString() {
+        $ss = SystemInfoWidget::getUptime();
         $s = $ss%60; // get seconds
         $m = floor(($ss%3600)/60); // get minutes
         $h = floor(($ss%86400)/3600); // get hours
@@ -45,6 +45,11 @@ class SystemInfoWidget implements AjaxWidget{
         if(strlen($M) == 1) { $M = "0".$M; }
 
         return $M."M, ".$d."d, ".$h."h, ".$m."m, ".$s."s";
+    }
+    
+    public static function getUptime() {
+        $parts = explode(" ", exec('cat /proc/uptime')); // get uptime
+        return $parts[0];
     }
     
     public static function getHostname() {
@@ -70,11 +75,12 @@ class SystemInfoWidget implements AjaxWidget{
     }
 
     public function getAjaxInterval() {
-        return 10000;
+        return 1000;
     }
 
     public function getAjaxScript() {
-        return "function SystemInfoWidget() { $('#dashboard-load').load('Ajax.php?widget=SystemInfoWidget&action=updateLoad'); $('#dashboard-temperature').load('Ajax.php?widget=SystemInfoWidget&action=updateTemp');}";
+        return "var time = ".SystemInfoWidget::getUptime().";
+            function SystemInfoWidget() { $('#dashboard-load').load('Ajax.php?widget=SystemInfoWidget&action=updateLoad'); $('#dashboard-temperature').load('Ajax.php?widget=SystemInfoWidget&action=updateTemp');time++;var s = time%60;var m = Math.floor(time%3600)/60;var h = Math.floor(time%86400)/3600;var d = Math.floor(time%2592000)/86400;var M = Math.floor(time/2592000);s = Math.floor(s)+\"\";m = Math.floor(m)+\"\";h = Math.floor(h)+\"\";d = Math.floor(d)+\"\";M = Math.floor(M)+\"\";if(s.length == 1) { s = \"0\"+s }if(m.length == 1) { m = \"0\"+m }if(h.length == 1) { h = \"0\"+h }if(d.length == 1) { d = \"0\"+d }if(M.length == 1) { M = \"0\"+M }$('#dashboard-uptime').html(M+\"M, \"+d+\"d, \"+h+\"h, \"+m+\"m, \"+s+\"s\");        }";
     }
 
     public function processAction($action) {
