@@ -74,16 +74,6 @@ class SystemInfoWidget implements AjaxWidget{
         return (exec('cat /sys/class/thermal/thermal_zone0/temp') / 1000)." &deg;C";
     }
 
-    public function getAjaxInterval() {
-        return 1000;
-    }
-
-    public function getAjaxScript() {
-        return "var servertime = ".SystemInfoWidget::getUptime().";
-            var starttime = new Date().getTime();
-            function SystemInfoWidget() { $('#dashboard-load').load('Ajax.php?widget=SystemInfoWidget&action=updateLoad'); $('#dashboard-temperature').load('Ajax.php?widget=SystemInfoWidget&action=updateTemp');var time = (servertime + (new Date().getTime() - starttime)/1000);var s = time%60;var m = Math.floor(time%3600)/60;var h = Math.floor(time%86400)/3600;var d = Math.floor(time%2592000)/86400;var M = Math.floor(time/2592000);s = Math.floor(s)+\"\";m = Math.floor(m)+\"\";h = Math.floor(h)+\"\";d = Math.floor(d)+\"\";M = Math.floor(M)+\"\";if(s.length == 1) { s = \"0\"+s }if(m.length == 1) { m = \"0\"+m }if(h.length == 1) { h = \"0\"+h }if(d.length == 1) { d = \"0\"+d }if(M.length == 1) { M = \"0\"+M }$('#dashboard-uptime').html(M+\"M, \"+d+\"d, \"+h+\"h, \"+m+\"m, \"+s+\"s\");        }";
-    }
-
     public function processAction($action) {
         switch($action) {
             case "updateLoad":
@@ -96,6 +86,15 @@ class SystemInfoWidget implements AjaxWidget{
                 echo "No data available!";
                 break;
         }
+    }
+
+    public function registerFunctions($ajaxFactory) {
+        $ajaxFactory->registerFunction("function SystemInfoWidgetLoad() { $('#dashboard-load').load('Ajax.php?widget=SystemInfoWidget&action=updateLoad'); $('#dashboard-temperature').load('Ajax.php?widget=SystemInfoWidget&action=updateTemp');}");
+        $ajaxFactory->registerInterval("SystemInfoWidgetLoad", 10000);
+        $ajaxFactory->registerFunction("var servertime = ".SystemInfoWidget::getUptime().";
+            var starttime = new Date().getTime();
+            function SystemInfoWidgetUptime() { var time = (servertime + (new Date().getTime() - starttime)/1000);var s = time%60;var m = Math.floor(time%3600)/60;var h = Math.floor(time%86400)/3600;var d = Math.floor(time%2592000)/86400;var M = Math.floor(time/2592000);s = Math.floor(s)+\"\";m = Math.floor(m)+\"\";h = Math.floor(h)+\"\";d = Math.floor(d)+\"\";M = Math.floor(M)+\"\";if(s.length == 1) { s = \"0\"+s }if(m.length == 1) { m = \"0\"+m }if(h.length == 1) { h = \"0\"+h }if(d.length == 1) { d = \"0\"+d }if(M.length == 1) { M = \"0\"+M }$('#dashboard-uptime').html(M+\"M, \"+d+\"d, \"+h+\"h, \"+m+\"m, \"+s+\"s\");}");
+        $ajaxFactory->registerInterval("SystemInfoWidgetUptime", 1000);
     }
 }
 

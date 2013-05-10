@@ -48,17 +48,14 @@ class NetworkTrafficWidget implements AjaxWidget {
         }
         return $output;
     }
-    
-    public function getAjaxInterval() {
-        return 30000;
-    }
-
-    public function getAjaxScript() {
-        return "function NetworkTrafficWidget() { $('#dashboard-traffic').load('Ajax.php?widget=NetworkTrafficWidget');}";
-    }
 
     public function processAction($action) {
         echo $this;
+    }
+
+    public function registerFunctions($ajaxFactory) {
+        $ajaxFactory->registerFunction("function NetworkTrafficWidget() { $('#dashboard-traffic').load('Ajax.php?widget=NetworkTrafficWidget');}");
+        $ajaxFactory->registerInterval("NetworkTrafficWidget", 30000);
     }
 }
 

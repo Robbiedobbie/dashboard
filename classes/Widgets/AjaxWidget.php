@@ -7,9 +7,7 @@
  * @author Rob Bogie
  */
 interface AjaxWidget {
-    //Note that atleast one of the functions should have the same name as the class.
-    public function getAjaxScript();
-    public function getAjaxInterval();
+    public function registerFunctions($ajaxFactory);
     public function processAction($action);
 }
 

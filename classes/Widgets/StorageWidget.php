@@ -39,17 +39,14 @@ class StorageWidget implements AjaxWidget{
         }
         return $output;
     }
-    
-    public function getAjaxInterval() {
-        return 30000;
-    }
-
-    public function getAjaxScript() {
-        return "function StorageWidget() { $('#dashboard-storage').load('Ajax.php?widget=StorageWidget');}";
-    }
 
     public function processAction($action) {
         echo $this;
+    }
+
+    public function registerFunctions($ajaxFactory) {
+        $ajaxFactory->registerFunction("function StorageWidget() { $('#dashboard-storage').load('Ajax.php?widget=StorageWidget');}");
+        $ajaxFactory->registerInterval("StorageWidget", 30000);
     }
 }
 

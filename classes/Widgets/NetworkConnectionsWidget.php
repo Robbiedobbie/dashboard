@@ -38,17 +38,14 @@ class NetworkConnectionsWidget implements AjaxWidget {
         }
         return $output;
     }
-    
-    public function getAjaxInterval() {
-        return 30000;
-    }
-
-    public function getAjaxScript() {
-        return "function NetworkConnectionsWidget() { $('#dashboard-network').load('Ajax.php?widget=NetworkConnectionsWidget');}";
-    }
 
     public function processAction($action) {
         echo $this;
+    }
+
+    public function registerFunctions($ajaxFactory) {
+        $ajaxFactory->registerFunction("function NetworkConnectionsWidget() { $('#dashboard-network').load('Ajax.php?widget=NetworkConnectionsWidget');}");
+        $ajaxFactory->registerInterval("NetworkConnectionsWidget", 30000);
     }
 }
 

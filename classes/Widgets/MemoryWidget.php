@@ -38,17 +38,14 @@ class MemoryWidget implements AjaxWidget {
         }
         return $output;
     }
-    
-    public function getAjaxInterval() {
-        return 30000;
-    }
-
-    public function getAjaxScript() {
-        return "function MemoryWidget() { $('#dashboard-memory').load('Ajax.php?widget=MemoryWidget');}";
-    }
 
     public function processAction($action) {
         echo $this;
+    }
+
+    public function registerFunctions($ajaxFactory) {
+        $ajaxFactory->registerFunction("function MemoryWidget() { $('#dashboard-memory').load('Ajax.php?widget=MemoryWidget');}");
+        $ajaxFactory->registerInterval("MemoryWidget", 30000);
     }
     
 }
