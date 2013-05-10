@@ -45,13 +45,6 @@
           <div class='nav-collapse collapse pull-right'>
             <ul class='nav'>
               <li><a href='index.php'>General</a></li>
-              <li class='dropdown'>
-	        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Software<b class='caret'></b></a>
-		<ul class='dropdown-menu' role='menu'>
-		  <li><a href='#'>This is a stub</a></li>
-		</ul>
-	      </li>
-              <li><a href='test.php'>Notifications</a></li>
             </ul>
           </div>
         </div>
