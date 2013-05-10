@@ -1,6 +1,8 @@
 <?php
 error_reporting(E_ALL);
 
+include("AuthenticationProvider.php");
+
 function exception_error_handler($errno, $errstr, $errfile, $errline ) {
     throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
 }
@@ -18,7 +20,7 @@ class DashBoard {
     }
     
     public function displayPage() {
-        include("config/details.php");
+        include("config/settings.php");
         $ajaxFactory = new AjaxFactory();
         
         $systemInfoWidget = new SystemInfoWidget();

@@ -1,4 +1,7 @@
 <?php
+
+include("AuthenticationProvider.php");
+
 require_once 'classes/Widgets/AjaxWidget.php';
 require_once 'ClassLoader.php';
 import();
