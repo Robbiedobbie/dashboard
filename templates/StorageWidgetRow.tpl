@@ -1,1 +1,1 @@
-<tr><td>{{@StorageDevice}}</td><td>{{@StorageSize}}</td><td>{{@StorageUsed}}</td><td>{{@StorageAvailable}}</td><td>{{@StorageUsage}}</td><td>{{@StorageMountpoint}}</td></tr>
+<tr><td>{{@StorageDevice}}</td><td>{{@StorageSize}}</td><td>{{@StorageUsed}}</td><td>{{@StorageAvailable}}</td><td>{{@StorageUsage}}</td><td>{{@StorageMountpoint}}</td>{{@StorageUnmountCell}}</tr>

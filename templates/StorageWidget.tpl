@@ -7,6 +7,7 @@
       <th><span class='color'>Available</span></th>
       <th><span class='color'>Usage</span></th>
       <th><span class='color'>Mountpoint</span></th>
+      {{@StorageUnmountColumn}}
     </thead>
     {{@StorageTableRows}}
   </table>

@@ -8,11 +8,18 @@ $loginEnabled = true;
 
 //If this is set the loginUser and loginPass settings will be ignored. If not using, set to false
 //Calculate the hash like this: md5($loginUser.":".$loginRealm.":".$loginPass);
-$loginA1Hash = "cf0af44236de69510475772e8488af4b";
+$loginA1Hash = false;
 $loginRealm = "Dashboard - ".$device_name;
 //the following can be left empty if loginA1Hash is set
-$loginUser = "root";
-$loginPass = "";
+$loginUser = "user";
+$loginPass = "password";
 
+/**
+ * Storage
+ */
+//This enables/disables a function with which you can unmount storage devices on the server. To do this, you need to have the sudo command working, and set up to not ask a password for the unmount command.
+$unmountEnabled = true;
+//Here you can tell the system to ignore some devices for unmounting. Seperate them with a ;
+$ignoredStorageDevices = "/dev/sda1;/dev/sda2;/dev/sdb1";
 
 ?>
