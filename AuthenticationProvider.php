@@ -25,7 +25,7 @@ if($loginEnabled) {
     }
 
     if (empty($_SERVER['PHP_AUTH_DIGEST']) && !(isset($_SESSION['AUTHOR']) && $_SESSION['AUTHOR'] == "")) {
-        header('WWW-Authenticate: Digest realm="'.$loginRealm.'",qop="auth",nonce="'.uniqid().'",opaque="'.md5($device_name.gettimeofday()).'"');
+        header('WWW-Authenticate: Digest realm="'.$loginRealm.'",qop="auth",nonce="'.uniqid().'",opaque="'.md5($device_name.gettimeofday(true)).'"');
 
         dieWithAuthenticationError();
     }
