@@ -16,3 +16,8 @@ If you have Git installed you can clone the repo
 - Add charts
 - Wake-On-Lan functionality
 - Installed Software List
+
+#### Requirements
+ - PHP 5.3
+ - Netstat
+ - VNStat

@@ -1,33 +1,33 @@
 <?php
 error_reporting(E_ALL);
 
-include("AuthenticationProvider.php");
-
 function exception_error_handler($errno, $errstr, $errfile, $errline ) {
     throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
 }
 set_error_handler("exception_error_handler");
 
-require_once('ClassLoader.php');
-//Imports given classes (All if no argument is supplied)import();
-import();
+include("AuthenticationProvider.php");
+
+include_once 'classes/dashboard/system/classautoloader.php';
+
+$classAutoLoader = new \Dashboard\System\ClassAutoLoader(__DIR__."/classes", array("php", "class.php"), true);
 
 class DashBoard {
     private $pageTemplate;
     
     public function __construct() {
-        $this->pageTemplate = new Template("MainLayout.tpl");
+        $this->pageTemplate = new \Dashboard\System\Template("MainLayout.tpl");
     }
     
     public function displayPage() {
         include("config/settings.php");
-        $ajaxFactory = new AjaxFactory();
+        $ajaxFactory = new \Dashboard\Ajax\AjaxFactory();
         
-        $systemInfoWidget = new SystemInfoWidget();
-        $memoryWidget = new MemoryWidget();
-        $storageWidget = new StorageWidget();
-        $networkTrafficWidget = new NetworkTrafficWidget();
-        $networkConnectionsWidget = new NetworkConnectionsWidget();
+        $systemInfoWidget = new \Dashboard\Widgets\SystemInfoWidget();
+        $memoryWidget = new \Dashboard\Widgets\MemoryWidget();
+        $storageWidget = new \Dashboard\Widgets\StorageWidget();
+        $networkTrafficWidget = new \Dashboard\Widgets\NetworkTrafficWidget();
+        $networkConnectionsWidget = new \Dashboard\Widgets\NetworkConnectionsWidget();
         
         $ajaxFactory->registerWidget($systemInfoWidget);
         $ajaxFactory->registerWidget($memoryWidget);
