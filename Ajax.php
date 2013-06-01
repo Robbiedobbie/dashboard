@@ -1,9 +1,9 @@
 <?php
 
-include("AuthenticationProvider.php");
-
 include_once 'classes/dashboard/system/classautoloader.php';
 $classAutoLoader = new \Dashboard\System\ClassAutoLoader(__DIR__."/classes", array("php", "class.php"), true);
+
+\Dashboard\System\AuthenticationProvider::authenticate();
 
 if(isset($_GET['widget'])) {
     $widget = '\\Dashboard\\Widgets\\'.$_GET['widget'];
