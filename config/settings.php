@@ -3,12 +3,12 @@
 // use this file to set some specific details about this server
 // such as the device name (for the page title and navigation bar)
 
-$device_name = "HomeServer";
-$loginEnabled = true;
+$device_name = "Device";
+$loginEnabled = false;
 
 //If this is set the loginUser and loginPass settings will be ignored. If not using, set to false
 //Calculate the hash like this: md5($loginUser.":".$loginRealm.":".$loginPass);
-$loginA1Hash = "cd95344cc70cc3e356754ffc640900aa";
+$loginA1Hash = false;
 $loginRealm = "Dashboard - ".$device_name;
 //the following can be left empty if loginA1Hash is set
 $loginUser = "root";
