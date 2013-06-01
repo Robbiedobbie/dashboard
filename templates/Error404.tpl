@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{@DeviceName}} - General</title>
+    <title>Error - Page not found</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -16,19 +16,12 @@
     </style>
 
     <link href="internals/stylesheet.css" rel="stylesheet">
-    <script src="internals/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="bootstrap/js/html5shiv.js"></script>
     <![endif]-->
-
-    <!-- Ajax scripts -->
-    <script type="text/javascript">
-      {{@AjaxScripts}}
-    </script>
-
   </head>
 
   <body>
@@ -50,44 +43,9 @@
         </div>
       </div>
     </div>
-
-    <div class="container">
-
-      <div class="row">
-        <span class="span6">
-	  {{@SystemInfoWidget}}
-	</span>
-        <span class="span6" id="dashboard-memory">
-	  {{@MemoryWidget}}
-	</span>
-      </div>
-
-      <div class="row">	
-        <span class="span12" id="dashboard-storage">
-	  {{@StorageWidget}}
-	</span>
-      </div>
-
-      <div class="row">
-        <span class="span12" id="dashboard-traffic">
-          {{@NetworkTrafficWidget}}
-        </span>
-      </div>
-
-      <div class="row">
-        <span class="span12" id="dashboard-network">
-          {{@NetworkConnectionsWidget}}
-        </span>
-      </div>
-
-
-      </div>
-
-    </div> <!-- /container -->
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap/js/jquery.js"></script>
+    <div class='container'>
+      <br /><br /><h1>Sorry, that page doesn’t exist!</h1><br /><br />
+      <p>You can go home by following this link: <a href='/'>Home</a>.</p>
+    </div>
   </body>
 </html>

@@ -10,7 +10,13 @@ include_once 'classes/dashboard/system/classautoloader.php';
 
 $classAutoLoader = new \Dashboard\System\ClassAutoLoader(__DIR__."/classes", array("php", "class.php"), true);
 
+$page = "WidgetPage";
+
+if(isset($_GET['page'])) {
+	$page = $_GET['page'];
+}
+
 $pageRenderer = new \Dashboard\Common\PageRenderer();
-$pageRenderer->renderPage("WidgetPage");
+$pageRenderer->renderPage($page);
 
 ?>
